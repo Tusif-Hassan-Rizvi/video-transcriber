@@ -16,7 +16,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoSrc, plainText }) => {
   const textBoxRef = useRef<HTMLDivElement>(null);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const subtitles: Subtitle[] = plainText;
-  console.log(subtitles);
 
   const handleTimeUpdate = () => {
     if (videoRef.current) {
@@ -27,10 +26,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ videoSrc, plainText }) => {
     }
   };
 
-  useEffect(() => {
-    if (textBoxRef.current) {
-    }
-  }, []);
 
   return (
     <>

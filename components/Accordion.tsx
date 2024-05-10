@@ -1,9 +1,18 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
 
-function Accordion() {
+interface AccordionContent {
+  accordionTitle: string;
+  accordionlink: { linktext: string; linkhref: string }[];
+}
+
+const Accordion: React.FC<AccordionContent> = ({
+  accordionTitle,
+  accordionlink,
+}) => {
   const [isopen, setIsopen] = useState<boolean>(false);
 
   const toggleAccordion = () => {
@@ -13,7 +22,7 @@ function Accordion() {
   return (
     <div className="accordion-box">
       <div className="accordion-titile-box" onClick={toggleAccordion}>
-        <span className="accordion-tittle">Section 1</span>
+        <span className="accordion-tittle">{accordionTitle}</span>
 
         <picture>
           {isopen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
@@ -22,14 +31,15 @@ function Accordion() {
 
       {isopen && (
         <ul className="accordion-content">
-         <li>Video</li>
-         <li>PPT</li>
-         <li>Reading</li>
-         <li>Assignement</li>
+          {accordionlink.map((val, index) => (
+            <Link href={val.linkhref} key={index}>
+              <li>{val.linktext}</li>
+            </Link>
+          ))}
         </ul>
       )}
     </div>
   );
-}
+};
 
 export default Accordion;
